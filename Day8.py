@@ -6,6 +6,10 @@ from bs4 import BeautifulSoup
 os.system("clear")
 alba_url = "http://www.alba.co.kr"
 
+dir = os.path.join('csv')
+if not os.path.exists(dir):
+    os.mkdir(dir)
+
 company_list = []
 link_list = []
 
