@@ -3,8 +3,7 @@ import csv
 import requests
 from bs4 import BeautifulSoup
 
-# os.system("clear")
-os.system("cls")
+os.system("clear")
 alba_url = "http://www.alba.co.kr"
 
 company_list = []
@@ -59,22 +58,17 @@ def extract_detail_company_info(url):
     return info
 
 
-def make_csv(detail):
+def make_csv(detail, index, last_num):
     try:
         comp_title = detail.get('company')
-        print(comp_title)
-        if detail.get('link') == 'http://www.alba.co.kr/job/brand/elandfashion/job/brand/?page=1&pagesize=50':
-            return
-        elif detail.get('link') == 'http://www.alba.co.kr/job/brand/elandintro/job/brand/?page=1&pagesize=50':
-            return
-        else:
-            temp_url = detail.get('link') + "job/brand/?page=1&pagesize=50"
-            print(temp_url)
-            detail_info = extract_detail_company_info(temp_url)
+        print(f"[{index+1}/{last_num}] {comp_title}")
+        temp_url = detail.get('link')
+        detail_info = extract_detail_company_info(temp_url)
     except AttributeError:
         return
 
-    file = open(f"{comp_title}.csv", mode="w", encoding='utf-8', newline='')
+    file = open(f"csv/{comp_title}.csv", mode="w",
+                encoding='utf-8', newline='')
     writer = csv.writer(file)
 
     if detail_info == "해당 조건/분류에 일치하는 채용정보가 없습니다.":
@@ -87,5 +81,5 @@ def make_csv(detail):
         writer.writerow(list(info.values()))
 
 
-for comp_detail in brand_list:
-    make_csv(comp_detail)
+for index, comp_detail in enumerate(brand_list):
+    make_csv(comp_detail, index, len(brand_list))
