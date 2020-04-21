@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://andybrewer.github.io/mvp/mvp.css" rel="stylesheet"></link>
+  <style>
+        header{
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+      }
+      
+      .header_element{
+          display:flex;
+          align-items: center;
+          justify-content: center;
+      }
+  </style>
+</head>
+
+<body>
+    <header>
+        <h1>Nomad New</h1>
+        <div class="header_element">
+            <h3>Order by: </h3>
+            <a href="/?order_by=popular">Popluar</a>
+            <p>|</p>
+            <a href="/?order_by=new">New</a>
+        </div>
+    </header>
+
+    <div class="contents">
+        <ul class="content_ul">
+            <li class="content_li">
+                {{json}}
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
