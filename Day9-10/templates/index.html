@@ -15,6 +15,18 @@
           align-items: center;
           justify-content: center;
       }
+      .content_ul{
+        list-style-type: none;
+          display: flex;
+        flex-direction: column;
+          justify-content: center;
+      }
+      .content_li{
+          margin: 50px 300px;
+      }
+      .content__span{
+          display: block;
+      }
   </style>
 </head>
 
@@ -33,8 +45,13 @@
         <ul class="content_ul">
             {% for popular in popular_list %}
                 <li class="content_li">
-                    {{popular.get('title')}} ({{popular.get('url')}})
-                    {{popular.get('points')}}points | By: {{popular.get('author')}} | {{popular.get('url')}} comments
+                    <div class="content__span">
+                        <div>
+                            <a href="/{{popular.get('objectID')}}">{{popular.get('title')}}</a>
+                            <a href="{{popular.get('url')}}">({{popular.get('url')}})</a>
+                            </div>
+                        <div>{{popular.get('points')}}points | By: {{popular.get('author')}} | {{popular.get('url')}} comments</div>
+                    </div>
                 </li>
             {% endfor %}
         </ul>

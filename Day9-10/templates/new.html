@@ -15,6 +15,18 @@
           align-items: center;
           justify-content: center;
       }
+      .content_ul{
+        list-style-type: none;
+          display: flex;
+        flex-direction: column;
+          justify-content: center;
+      }
+      .content_li{
+          margin: 50px 300px;
+      }
+      .content__span{
+          display: block;
+      }
   </style>
 </head>
 
@@ -33,8 +45,13 @@
         <ul class="content_ul">
             {% for new in new_list %}
                 <li class="content_li">
-                    {{new.get('title')}} ({{new.get('url')}})
-                    {{new.get('points')}}points | By: {{new.get('author')}} | {{new.get('url')}} comments
+                    <div class="content__span">
+                        <div>
+                            <a href="/{{new.get('objectID')}}">{{new.get('title')}}</a>
+                            <a href="{{new.get('url')}}">({{new.get('url')}})</a>
+                            </div>
+                        <div>{{new.get('points')}}points | By: {{new.get('author')}} | {{new.get('url')}} comments</div>
+                    </div>
                 </li>
             {% endfor %}
         </ul>

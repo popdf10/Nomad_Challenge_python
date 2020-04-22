@@ -3,10 +3,56 @@
 
 <head>
   <link href="https://andybrewer.github.io/mvp/mvp.css" rel="stylesheet"></link>
+  <style>
+        header{
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+      }
+      
+      .header_element{
+          display:flex;
+          align-items: center;
+          justify-content: center;
+      }
+      .content_ul{
+        list-style-type: none;
+          display: flex;
+        flex-direction: column;
+          justify-content: center;
+      }
+      .content_li{
+          margin: 50px 300px;
+      }
+      .content__span{
+          display: block;
+      }
+  </style>
 </head>
 
 <body>
-    <h1>Here is Detail page</h1>
+    <header>
+        <h1>Nomad New</h1>
+        <div class="header_element">
+            <h3>Order by: </h3>
+            <a href="/?order_by=popular">Popluar</a>
+            <p>|</p>
+            <a href="/?order_by=new">New</a>
+        </div>
+    </header>
+
+    <div class="contents">
+        <ul class="content_ul">
+            {% for comment in comment_list %}
+                <li class="content_li">
+                    <div class="content__span">
+                        <b><div>{{comment.get('author')}}:</div></b>
+                        <div>{{comment.get('text')|safe}}</div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 
 </html>
