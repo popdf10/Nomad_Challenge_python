@@ -18,7 +18,11 @@
     {% for card in reddit_list %}
       <div>
           <h3><a href="https://reddit.com{{card.get('url')}}" target="_blank">{{card.get('title')}}</a></h3>
+          {% if card.get('upvote') is float %}
+          <h4>{{card.get('upvote')/1000}}k upvotes ·  r/{{card.get('subreddit')}}</h4>
+          {% else %}
           <h4>{{card.get('upvote')}} upvotes ·  r/{{card.get('subreddit')}}</h4>
+          {% endif %}
         <hr />
       </div>
     {% endfor %}

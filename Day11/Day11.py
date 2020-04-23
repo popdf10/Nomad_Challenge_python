@@ -53,7 +53,10 @@ def scrape_reddit(list):
                 continue
             else:
                 try:
-                    upvote = int(upvote)
+                    if 'k' in upvote:
+                        upvote = float(upvote.replace('k', '')) * 1000
+                    else:
+                        upvote = int(upvote)
                 except ValueError:
                     continue
             title = card.find("h3").text
