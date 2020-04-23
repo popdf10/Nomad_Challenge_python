@@ -86,7 +86,7 @@ def read():
     reddit_list = scrape_reddit(extract_reddits)
     elapsed_time = time.time() - start_time
 
-    print(f"{elapsed_time} milliseconds")
+    print(f"{elapsed_time} seconds")
     return render_template("read.html", reddit_list=reddit_list, reddit_item=extract_reddits)
 
 
