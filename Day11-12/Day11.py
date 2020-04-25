@@ -53,7 +53,10 @@ def scrape_reddit(list):
                 continue
             else:
                 try:
-                    upvote = int(upvote)
+                    if 'k' in upvote:
+                        upvote = float(upvote.replace('k', '')) * 1000
+                    else:
+                        upvote = int(upvote)
                 except ValueError:
                     continue
             title = card.find("h3").text
@@ -72,7 +75,21 @@ app = Flask("DayEleven")
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html", lists=subreddits)
+
+
+@app.route("/add", methods=['GET', 'POST'])
+def add():
+    if request.method == 'POST':
+        subreddit = request.form['new-subreddit']
+        if '/r/' in subreddit:
+            warning = 'Write the name without /r/'
+        elif requests.get(f"https://www.reddit.com/r/{subreddit}").status_code == 404:
+            warning = 'That subreddit does not exist.'
+        else:
+            subreddits.append(subreddit)
+            return render_template("home.html", lists=subreddits)
+    return render_template("add.html", warning=warning)
 
 
 @app.route("/read")
